@@ -15,4 +15,15 @@ defmodule WebScrapper do
     |> Enum.filter(fn {html, _ , [text]} -> text == "Tech" end)
   end
 
+  def get_links do
+    {:ok, html} = Floki.parse_document(get_meetup("https://www.meetup.com/find/language/"))
+    # IO.inspect(html, label: "This is the html")
+    Floki.find(html, "a.groupCard--photo")
+    |> Enum.flat_map(fn {html, attrs , _ } -> Enum.filter( attrs, fn {attr, value} -> attr == "href" end) end)
+    |> Enum.map(fn {attr, value} -> value end)
+  end
+
 end
+
+#documentation
+#IO.inspect
