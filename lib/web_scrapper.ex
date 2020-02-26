@@ -23,6 +23,21 @@ defmodule WebScrapper do
     |> Enum.map(fn {attr, value} -> value end)
   end
 
+#a function that has one single responsability
+  def extract_event(url) do
+    {:ok, html} = Floki.parse_document(get_meetup(url))
+    [ result_one | _ ] = Floki.find(html, ".groupHomeHeader-groupNameLink")
+    [ result_second | _ ] = Floki.find(html, ".groupHomeHeaderInfo-cityLink")
+    [ result_three | _ ] = Floki.find(html, "#overview")
+    Floki.text(result_one)
+    Floki.text(result_second)
+    Floki.text(result_three)
+  end
+#TO_DO:save the information in a csv file.
+  # def save_event do
+  #
+  # end
+
 end
 
 #documentation
