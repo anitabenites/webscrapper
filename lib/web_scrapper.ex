@@ -29,11 +29,12 @@ defmodule WebScrapper do
     [ result_one | _ ] = Floki.find(html, ".groupHomeHeader-groupNameLink")
     [ result_second | _ ] = Floki.find(html, ".groupHomeHeaderInfo-cityLink")
     [ result_three | _ ] = Floki.find(html, "#overview")
-    Floki.text(result_one)
-    Floki.text(result_second)
-    Floki.text(result_three)
+    [Floki.text(result_one),
+    Floki.text(result_second),
+    Floki.text(result_three)]
+
   end
-#TO_DO:save the information in a csv file.
+#TO_DO: save the information in a csv file.
   # def save_event do
   #
   # end
